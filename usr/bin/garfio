@@ -384,6 +384,18 @@ main (){
 	cp -af /etc/garfio/isolinux/* $TMPDIR/iso/isolinux/
 	cp -af /etc/garfio/preseed/* $TMPDIR/iso/preseed/
 
+	MYLANG=`echo $LANG | awk -F "." '{print $1}'`
+	sed -e "s/initrd=/locale=$MYLANG initrd=/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
+	mv -f /tmp/isolinux.cfg.garfio $TMPDIR/iso/isolinux/isolinux.cfg
+
+	MYRELEASE=`lsb_release -sd`
+	sed -e "s/_RELEASEVERSION_/$MYRELEASE/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
+	mv -f /tmp/isolinux.cfg.garfio $TMPDIR/iso/isolinux/isolinux.cfg
+
+	MYDISTRO=`lsb_release -si`
+	sed -e "s/_RELEASE_/$MYDISTRO/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
+	mv -f /tmp/isolinux.cfg.garfio $TMPDIR/iso/isolinux/isolinux.cfg
+
 	ARCH=`archdetect | awk -F "/" '{print $1}'`
 	cat > $TMPDIR/iso/README.diskdefines <<FOO
 #define DISKNAME  $LIVECDLABEL
