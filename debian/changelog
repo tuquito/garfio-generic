@@ -1,3 +1,10 @@
+garfio-generic (2.3) lucid; urgency=low
+
+  * fork from garfio
+  * Update to new versión
+
+ -- Mario Colque <mario@tuquito.org.ar>  Fri, 20 Aug 2010 23:03:52 -0300
+
 garfio (2.2-8) lucid; urgency=low
 
   * Nuevo isolinux

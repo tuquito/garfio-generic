@@ -9,10 +9,6 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-
-
-
-
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
@@ -23,27 +19,26 @@ configure-stamp:
 
 build: build-stamp
 
-build-stamp: configure-stamp  
+build-stamp: configure-stamp
 	dh_testdir
 	touch build-stamp
 
-clean: 
+clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-	dh_clean 
+	dh_clean
 
 install: build
 	dh_testdir
 	dh_testroot
-	dh_prep  
+	dh_prep
 	dh_installdirs
 
 	# Add here commands to install the package into debian/garfio.
-	#$(MAKE) DESTDIR=$(CURDIR)/debian/garfio install
-	cp -af usr $(CURDIR)/debian/garfio/
-	cp -af etc $(CURDIR)/debian/garfio/
-
+	#$(MAKE) DESTDIR=$(CURDIR)/debian/garfio-generic install
+	cp -af usr $(CURDIR)/debian/garfio-generic/
+	cp -af etc $(CURDIR)/debian/garfio-generic/
 
 # Build architecture-independent files here.
 binary-indep: install
@@ -53,7 +48,7 @@ binary-indep: install
 binary-arch: install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs 
+	dh_installchangelogs
 	dh_installdocs
 	dh_installexamples
 #	dh_install
@@ -82,3 +77,4 @@ binary-arch: install
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install configure
+
