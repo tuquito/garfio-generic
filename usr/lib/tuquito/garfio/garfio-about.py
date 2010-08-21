@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
- Garfio 2.2
+ Garfio 2.3
  Copyright (C) 2010
  Author: Mario Colque <mario@tuquito.org.ar>
  Tuquito Team! - www.tuquito.org.ar
@@ -19,8 +19,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 """
 
-import gtk, pygtk
-pygtk.require('2.0')
+import gtk
 
 class About:
 	def __init__(self):
@@ -29,7 +28,7 @@ class About:
 		self.window = self.glade.get_object('about')
 		self.glade.connect_signals(self)
 		self.window.show()
-		
+
 	def quit(self, widget, data=None):
 		gtk.main_quit()
 		return True
@@ -37,3 +36,4 @@ class About:
 if __name__ == '__main__':
 	About()
 	gtk.main()
+

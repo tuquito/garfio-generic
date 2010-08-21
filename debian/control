@@ -7,7 +7,9 @@ Standards-Version: 3.8.1
 
 Package: garfio-generic
 Architecture: all
-Depends: libnotify-bin, coreutils, mkisofs | genisoimage, findutils, bash, passwd, sed, squashfs-tools, casper, rsync, mount, libdebian-installer4, os-prober, ubiquity, user-setup, discover1 | discover, laptop-detect, syslinux, util-linux, xresprobe, metacity, ubiquity-frontend-gtk
+Depends: libnotify-bin, coreutils, mkisofs | genisoimage, findutils, bash, passwd, sed, squashfs-tools, casper, rsync, mount, libdebian-installer4, os-prober, ubiquity, user-setup, discover1 | discover, laptop-detect, syslinux, util-linux, xresprobe, metacity, ubiquity-frontend-gtk, memtest86+
+Conflicts: garfio
+Replaces: garfio
 Description: Generador de distribuciones y backups
  Garfio es un generador de Backup's y Distribuciones Personalizadas, integrado al escritorio, fácil y rápido.
 

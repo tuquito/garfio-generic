@@ -40,11 +40,11 @@ else
 fi
 
 if [ "$LIVECDLABEL" = "" ]; then
-	LIVECDLABEL="Custom LiveCD"
+	LIVECDLABEL="Garfio Live"
 fi
 
 if [ "$CUSTOMISO" = "" ]; then
-	CUSTOMISO="custom-$1.iso"
+	CUSTOMISO="garfio-$1.iso"
 fi
 
 error() {
@@ -298,6 +298,8 @@ main (){
 	mkdir -p $TMPDIR/system/{dev,etc,media/cdrom,mnt,proc,sys,tmp,var}
 	chmod ug+rwx,o+rwt $TMPDIR/system/tmp
 
+	chown $SUDO_USER:$SUDO_USER $TMPDIR
+
 	echo -e "${Color}${Verde}* "$(gettext "Copying /var /etc directory and excluding temporary extra files")"${CierreColor}"
 
 	if [ "$EXCLUDES" != "" ]; then
@@ -336,7 +338,7 @@ main (){
 		rm -f $TMPDIR/system/etc/shadow
 		rm -f $TMPDIR/system/etc/shadow-
 
-		find $TMPDIR/system/var/run $TMPDIR/system/var/log $TMPDIR/system/var/mail $TMPDIR/system/var/spool $TMPDIR/system/var/lock $TMPDIR/system/var/backups $TMPDIR/system/var/tmp $TMPDIR/system/var/crash -type f -exec rm {} \;
+		find $TMPDIR/system/var/run $TMPDIR/system/var/log $TMPDIR/system/var/mail $TMPDIR/system/var/spool $TMPDIR/system/var/lock $TMPDIR/system/var/backups $TMPDIR/system/var/tmp $TMPDIR/system/var/www $TMPDIR/system/var/crash -type f -exec rm {} \;
 
 		for i in dpkg.log lastlog mail.log syslog auth.log daemon.log faillog lpr.log mail.warn user.log boot debug mail.err messages wtmp bootstrap.log dmesg kern.log mail.info; do
 			touch $TMPDIR/system/var/log/${i}
@@ -499,40 +501,40 @@ FOO
 	echo -e "${Color}${Verde}* 2) "$(gettext "Adding files and folders required by the cd for the selected mode")"${CierreColor}"
 
 	# agrega el resto de los archivos del sistema dependiendo del modo seleccionado
-#	if [ "$1" = "back" ]; then
-#		mksquashfs / $TMPDIR/iso/casper/filesystem.squashfs $SQUASHFSOPTSHIGH -e \
-#		.thumbnails \
-#		.cache \
-#		.bash_history \
-#		Cache \
-#		boot/grub \
-#		dev \
-#		etc \
-#		media \
-#		mnt \
-#		proc \
-#		sys \
-#		tmp \
-#		var \
-#		$TMPDIR $EXCLUDES 2>>$TMPDIR/garfio.log
-#	else
-#		mksquashfs / $TMPDIR/iso/casper/filesystem.squashfs $SQUASHFSOPTSHIGH -e \
-#		.thumbnails \
-#		.cache \
-#		.bash_history \
-#		Cache \
-#		boot/grub \
-#		dev \
-#		etc \
-#		home \
-#		media \
-#		mnt \
-#		proc \
-#		sys \
-#		tmp \
-#		var \
-#		$TMPDIR $EXCLUDES 2>>$TMPDIR/garfio.log
-#	fi
+	if [ "$1" = "back" ]; then
+		mksquashfs / $TMPDIR/iso/casper/filesystem.squashfs $SQUASHFSOPTSHIGH -e \
+		.thumbnails \
+		.cache \
+		.bash_history \
+		Cache \
+		boot/grub \
+		dev \
+		etc \
+		media \
+		mnt \
+		proc \
+		sys \
+		tmp \
+		var \
+		$TMPDIR $EXCLUDES 2>>$TMPDIR/garfio.log
+	else
+		mksquashfs / $TMPDIR/iso/casper/filesystem.squashfs $SQUASHFSOPTSHIGH -e \
+		.thumbnails \
+		.cache \
+		.bash_history \
+		Cache \
+		boot/grub \
+		dev \
+		etc \
+		home \
+		media \
+		mnt \
+		proc \
+		sys \
+		tmp \
+		var \
+		$TMPDIR $EXCLUDES 2>>$TMPDIR/garfio.log
+	fi
 
 	sleep 1
 

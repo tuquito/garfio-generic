@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
- Garfio 2.2
+ Garfio 2.3
  Copyright (C) 2010
  Author: Mario Colque <mario@tuquito.org.ar>
  Tuquito Team! - www.tuquito.org.ar
@@ -19,8 +19,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 """
 
-import gtk, pygtk
-pygtk.require('2.0')
+import gtk
 import gettext, os, commands, sys
 from subprocess import Popen, PIPE
 import pynotify, threading, locale, gobject
@@ -127,7 +126,7 @@ class Garfio(threading.Thread):
 		print "Start threads"
 		self.quit = False
 		self.newThread(self.pulse)
-		
+
 		if self.action == 'rest':
 			self.cmd.append(self.file)
 			self.setStatus(_('Restoring file...'))
@@ -206,7 +205,7 @@ class WinGarfio:
 		self.glade.get_object('lbackh').set_label(_('Make a backup of the environment'))
 		self.glade.get_object('l2backh').set_label(_('<small>Creates a copy of your home directory</small>'))
 		self.glade.get_object('ltrans').set_label(_('Make an ISO in your language'))
-		self.glade.get_object('l2trans').set_label(_('<small>Make Tuquito speaks your language</small>'))	
+		self.glade.get_object('l2trans').set_label(_('<small>Your OS in your language</small>'))
 		#self.window.show()
 
 	def rest(self, garfioFile):
@@ -256,7 +255,7 @@ class WinGarfio:
 		# i18n dialogTrans
 		self.glade.get_object('dialog').set_title(_('Confirmation'))
 		self.glade.get_object('dialog').set_markup('<big><b>' + _('Do you want to change the language of an ISO image?') + '</b></big>')
-		self.glade.get_object('dialog').format_secondary_text(_('This option allows you to modify an ISO image Tuquito, leaving the default language selected.'))
+		self.glade.get_object('dialog').format_secondary_text(_('This option allows you to modify an ISO image, leaving the default language selected.'))
 		self.glade.get_object('dialog').show()
 
 	def confirm(self, widget, data=None):
@@ -273,7 +272,7 @@ class WinGarfio:
 			if data == -8:
 				hilo = Garfio(self.glade, self.action)
 				hilo.start()
-			
+
 	def notify(self, text):
 		sh = 'su ' + user + ' -c "notify-send \'Garfio\' \'' + text + '\' -i /usr/lib/tuquito/garfio/logo.png"'
 		os.system(sh)
@@ -294,19 +293,19 @@ class WinGarfio:
 					workdir = val
 			elif par == 'LIVEUSER':
 				if val == '':
-					liveuser = 'tuquito'
+					liveuser = 'garfio'
 				else:
 					liveuser = val
 			elif par == 'EXCLUDES':
 				excludes = val
 			if par == 'LIVECDLABEL':
 				if val == '':
-					livecdlabel = 'Tuquito LiveCD'
+					livecdlabel = 'Garfio Live'
 				else:
 					livecdlabel = val
 			elif par == 'CUSTOMISO':
 				if val == '':
-					iso = 'tuquito.iso'
+					iso = 'garfio.iso'
 				else:
 					iso = val
 			elif par == 'NOHIDDEN':
@@ -388,3 +387,4 @@ if __name__ == '__main__':
 	else:
 		w.rest(sys.argv[1])
 	gtk.main()
+

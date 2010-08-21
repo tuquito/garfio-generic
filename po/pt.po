@@ -1,4 +1,4 @@
-# Traducciones para Garfio 2.2
+# Traducciones para Garfio 2.3
 # Copyright (C) 2010 Tuquito Team!
 # This file is distributed under the same license as the garfio package.
 # Mario Colque <mario@tuquito.org.ar>, 2010.
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: garfio 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-30 01:36-0300\n"
+"POT-Creation-Date: 2010-08-20 22:12-0300\n"
 "PO-Revision-Date: 2010-06-14 16:13-0300\n"
 "Last-Translator: Carlos Felipe P. de Araújo <carlosfelipe@tuquito.org.ar>\n"
 "Language-Team: Portuguese\n"
@@ -16,100 +16,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: usr/lib/tuquito/garfio/garfio.py:57
+#: usr/lib/tuquito/garfio/garfio.py:56
 msgid "View details"
 msgstr "Ver detalhes"
 
-#: usr/lib/tuquito/garfio/garfio.py:118
+#: usr/lib/tuquito/garfio/garfio.py:117
 msgid "Finished!"
 msgstr "Finalizado!"
 
-#: usr/lib/tuquito/garfio/garfio.py:120
+#: usr/lib/tuquito/garfio/garfio.py:119
 msgid "Your backup has been restored correctly\n"
 msgstr "A sua cópia de segurança foi restaurada corretamente\n"
 
-#: usr/lib/tuquito/garfio/garfio.py:122
+#: usr/lib/tuquito/garfio/garfio.py:121
 msgid "His image has been generated successfully\n"
 msgstr "A sua imagem foi gerada corretamente\n"
 
-#: usr/lib/tuquito/garfio/garfio.py:133
+#: usr/lib/tuquito/garfio/garfio.py:132
 msgid "Restoring file..."
 msgstr "Restaurando arquivos..."
 
-#: usr/lib/tuquito/garfio/garfio.py:140
+#: usr/lib/tuquito/garfio/garfio.py:139
 msgid "Working... Please be patient"
 msgstr "Trabalhando... Por favor tenha paciência"
 
-#: usr/lib/tuquito/garfio/garfio.py:147
+#: usr/lib/tuquito/garfio/garfio.py:146
 msgid "Please select a language: "
 msgstr "Por favor selecione um idioma: "
 
-#: usr/lib/tuquito/garfio/garfio.py:148
+#: usr/lib/tuquito/garfio/garfio.py:147
 msgid "Select a ISO image: "
 msgstr "Selecione uma imagem ISO"
 
-#: usr/lib/tuquito/garfio/garfio.py:201
+#: usr/lib/tuquito/garfio/garfio.py:200
 msgid "Your live CD to a single click"
 msgstr "O seu live CD em poucos cliques"
 
-#: usr/lib/tuquito/garfio/garfio.py:202
+#: usr/lib/tuquito/garfio/garfio.py:201
 msgid "Make a custom distribution"
 msgstr "Gerar uma distribuição customizada"
 
-#: usr/lib/tuquito/garfio/garfio.py:203
+#: usr/lib/tuquito/garfio/garfio.py:202
 msgid "<small>Create your own distro</small>"
 msgstr "<small>Crie a sua própria distro</small>"
 
-#: usr/lib/tuquito/garfio/garfio.py:204
+#: usr/lib/tuquito/garfio/garfio.py:203
 msgid "Make a backup of the system"
 msgstr "Gerar uma cópia do sistema"
 
-#: usr/lib/tuquito/garfio/garfio.py:205
+#: usr/lib/tuquito/garfio/garfio.py:204
 msgid "<small>Creates a copy of your hard drive</small>"
 msgstr "<small>Crie uma cópia do seu disco rígido</small>"
 
-#: usr/lib/tuquito/garfio/garfio.py:206
+#: usr/lib/tuquito/garfio/garfio.py:205
 msgid "Make a backup of the environment"
 msgstr "Gerar uma cópia do ambiente"
 
-#: usr/lib/tuquito/garfio/garfio.py:207
+#: usr/lib/tuquito/garfio/garfio.py:206
 msgid "<small>Creates a copy of your home directory</small>"
 msgstr "<small>Crie uma cópia do seu diretório home</small>"
 
-#: usr/lib/tuquito/garfio/garfio.py:208
+#: usr/lib/tuquito/garfio/garfio.py:207
 msgid "Make an ISO in your language"
 msgstr "Fazer uma ISO no seu idioma"
 
-#: usr/lib/tuquito/garfio/garfio.py:209
-msgid "<small>Make Tuquito speaks your language</small>"
-msgstr "<small>Fazer com que Tuquito fale o seu idioma</small>"
+#: usr/lib/tuquito/garfio/garfio.py:208
+msgid "<small>Your OS in your language</small>"
+msgstr "<small>Seu sistema operacional na sua idioma</small>"
 
-#: usr/lib/tuquito/garfio/garfio.py:217
+#: usr/lib/tuquito/garfio/garfio.py:216
 msgid "Want to restore your home directory?"
 msgstr "Você deseja restaurar o seu diretório home?"
 
-#: usr/lib/tuquito/garfio/garfio.py:218
+#: usr/lib/tuquito/garfio/garfio.py:217
 msgid ""
 "This option allows you to restore your files and settings from a backup."
 msgstr ""
 "Esta opção lhe permite restaurar os seus arquivos e configurações a partir "
 "de uma copia de segurança."
 
-#: usr/lib/tuquito/garfio/garfio.py:219
+#: usr/lib/tuquito/garfio/garfio.py:218
 msgid "Overwrite existing files?"
 msgstr "Sobrescrever os arquivos existentes?"
 
-#: usr/lib/tuquito/garfio/garfio.py:225 usr/lib/tuquito/garfio/garfio.py:233
-#: usr/lib/tuquito/garfio/garfio.py:241 usr/lib/tuquito/garfio/garfio.py:249
-#: usr/lib/tuquito/garfio/garfio.py:257
+#: usr/lib/tuquito/garfio/garfio.py:224 usr/lib/tuquito/garfio/garfio.py:232
+#: usr/lib/tuquito/garfio/garfio.py:240 usr/lib/tuquito/garfio/garfio.py:248
+#: usr/lib/tuquito/garfio/garfio.py:256
 msgid "Confirmation"
 msgstr "Confirmação"
 
-#: usr/lib/tuquito/garfio/garfio.py:226
+#: usr/lib/tuquito/garfio/garfio.py:225
 msgid "Want to create a custom distribution?"
 msgstr "Você deseja gerar uma distribuição customizada?"
 
-#: usr/lib/tuquito/garfio/garfio.py:227
+#: usr/lib/tuquito/garfio/garfio.py:226
 msgid ""
 "This option allows you to create a distribution based on your system "
 "installed, creating an ISO image that will not include the /home directory, "
@@ -122,11 +122,11 @@ msgstr ""
 "imagem para utilizá-la como live CD/DVD/USB, disco de instalação e poder "
 "ainda compartilhá-la com todos os seus amigos."
 
-#: usr/lib/tuquito/garfio/garfio.py:234
+#: usr/lib/tuquito/garfio/garfio.py:233
 msgid "Want to create a backup of your system?"
 msgstr "Você deseja gerar uma cópia do seu sistema?"
 
-#: usr/lib/tuquito/garfio/garfio.py:235
+#: usr/lib/tuquito/garfio/garfio.py:234
 msgid ""
 "This option allows you to create an ISO image of your entire system, "
 "including the /home directory, configurations files and all existing users. "
@@ -139,11 +139,11 @@ msgstr ""
 "live CD/DVD/USB, disco de instalação e assim sempre ter à mão uma cópia do "
 "seu sistema completo."
 
-#: usr/lib/tuquito/garfio/garfio.py:242
+#: usr/lib/tuquito/garfio/garfio.py:241
 msgid "Would you like to create a backup of your environment?"
 msgstr "Você deseja gerar uma cópia do seu ambiente?"
 
-#: usr/lib/tuquito/garfio/garfio.py:243
+#: usr/lib/tuquito/garfio/garfio.py:242
 msgid ""
 "This option allows you to create a backup of your / home. This may include "
 "whether or not your existing settings and files saved. To configure this "
@@ -157,11 +157,11 @@ msgstr ""
 "\n"
 "Depois disso, você poderá restaurá-la clicando duas vezes."
 
-#: usr/lib/tuquito/garfio/garfio.py:250
+#: usr/lib/tuquito/garfio/garfio.py:249
 msgid "Would you like to clean up temporary files?"
 msgstr "Você deseja limpar os arquivos temporários?"
 
-#: usr/lib/tuquito/garfio/garfio.py:251
+#: usr/lib/tuquito/garfio/garfio.py:250
 msgid ""
 "This option allows you to clean the temporary working directory, deleting "
 "all the files that are created to generate an ISO image."
@@ -169,27 +169,27 @@ msgstr ""
 "Esta opção lhe permite limpar o diretório temporário de trabalho, removendo "
 "todos os arquivos que foram criados ao gerar a imagem ISO."
 
-#: usr/lib/tuquito/garfio/garfio.py:258
+#: usr/lib/tuquito/garfio/garfio.py:257
 msgid "Do you want to change the language of an ISO image?"
 msgstr "Você deseja mudar o idioma de uma imagem ISO?"
 
-#: usr/lib/tuquito/garfio/garfio.py:259
+#: usr/lib/tuquito/garfio/garfio.py:258
 msgid ""
-"This option allows you to modify an ISO image Tuquito, leaving the default "
-"language selected."
+"This option allows you to modify an ISO image, leaving the default language "
+"selected."
 msgstr ""
-"Esta opção lhe permite modificar uma imagem ISO do Tuquito, deixando o "
+"Esta opção lhe permite modificar uma imagem ISO, deixando o "
 "idioma padrão selecionado."
 
-#: usr/lib/tuquito/garfio/garfio.py:325
+#: usr/lib/tuquito/garfio/garfio.py:324
 msgid "Preferences"
 msgstr "Preferências"
 
-#: usr/lib/tuquito/garfio/garfio.py:326
+#: usr/lib/tuquito/garfio/garfio.py:325
 msgid "Temporary working directory"
 msgstr "Diretório temporário de trabalho"
 
-#: usr/lib/tuquito/garfio/garfio.py:327
+#: usr/lib/tuquito/garfio/garfio.py:326
 msgid ""
 "This is the directory where the ISO image to be stored and, temporarily, the "
 "necessary files as you work."
@@ -197,39 +197,39 @@ msgstr ""
 "Este é o diretório onde será guardada temporariamente a imagem ISO que será "
 "gerada e os arquivos que o Garfio necessitará enquanto está sendo executado."
 
-#: usr/lib/tuquito/garfio/garfio.py:328
+#: usr/lib/tuquito/garfio/garfio.py:327
 msgid "Files and directories to exclude, separated by commas"
 msgstr "Arquivos e diretórios a excluir, separados por vírgulas"
 
-#: usr/lib/tuquito/garfio/garfio.py:329
+#: usr/lib/tuquito/garfio/garfio.py:328
 msgid "Username for live CD/DVD"
 msgstr "Nome de usuário para o live CD/DVD"
 
-#: usr/lib/tuquito/garfio/garfio.py:330
+#: usr/lib/tuquito/garfio/garfio.py:329
 msgid "Username generated by default when you start in live mode."
 msgstr "Nome do usuário (padrão) quando se inicia em modo live."
 
-#: usr/lib/tuquito/garfio/garfio.py:331
+#: usr/lib/tuquito/garfio/garfio.py:330
 msgid "Name of the live CD/DVD"
 msgstr "Nome do live CD/DVD"
 
-#: usr/lib/tuquito/garfio/garfio.py:332
+#: usr/lib/tuquito/garfio/garfio.py:331
 msgid "This is the name of the mounted unit that contains the iso image."
 msgstr "Este é o nome da unidade montada que contém a imagem ISO."
 
-#: usr/lib/tuquito/garfio/garfio.py:333
+#: usr/lib/tuquito/garfio/garfio.py:332
 msgid "Name of iso file"
 msgstr "Nome do arquivo .iso"
 
-#: usr/lib/tuquito/garfio/garfio.py:334
+#: usr/lib/tuquito/garfio/garfio.py:333
 msgid "This is the name of your file .iso"
 msgstr "Este é o nome do seu arquivo .iso"
 
-#: usr/lib/tuquito/garfio/garfio.py:335
+#: usr/lib/tuquito/garfio/garfio.py:334
 msgid "Backup of /home without files or hidden directories"
 msgstr "Cópia de /home sem arquivos/diretórios ocultos"
 
-#: usr/lib/tuquito/garfio/garfio.py:336
+#: usr/lib/tuquito/garfio/garfio.py:335
 msgid ""
 "If you enable this option, when you generate a backup of the environment (/"
 "home), do not store the files or hidden directories."
@@ -238,16 +238,16 @@ msgstr ""
 "ambiente (/home), não serão guardados os arquivos, nem os diretórios "
 "ocultos. Portanto, tampouco as suas configurações pessoais."
 
-#: usr/bin/garfio:52
+#: usr/bin/garfio:51
 msgid "Usage"
 msgstr "Modo de uso"
 
-#: usr/bin/garfio:55
+#: usr/bin/garfio:54
 msgid "To make a complete backup of your system. Including the home directory"
 msgstr ""
 "Para fazer uma cópia completa do seu sistema, incluindo o diretório home"
 
-#: usr/bin/garfio:56
+#: usr/bin/garfio:55
 msgid ""
 "To make a complete backup of the user's home directory. May or may not "
 "include hidden files"
@@ -255,192 +255,192 @@ msgstr ""
 "Para fazer uma cópia do seu diretório home, podendo incluir ou não arquivos "
 "ocultos"
 
-#: usr/bin/garfio:57
+#: usr/bin/garfio:56
 msgid "To clean temporary files from Garfio"
 msgstr "Para limpar o diretório temporário do Garfio"
 
-#: usr/bin/garfio:58
+#: usr/bin/garfio:57
 msgid ""
 "To make a distribution based on your system. Excluding the home directory"
 msgstr ""
 "Para fazer uma distribuição baseada no seu sistema, excluindo o diretório "
 "home"
 
-#: usr/bin/garfio:59
+#: usr/bin/garfio:58
 msgid "Stops all processes launched"
 msgstr "Para todos os processos iniciados"
 
-#: usr/bin/garfio:60
-msgid "Locate your iso Tuquito"
-msgstr "Localizar a sua ISO Tuquito"
+#: usr/bin/garfio:59
+msgid "Locate your iso"
+msgstr "Localizar a sua ISO"
 
-#: usr/bin/garfio:66 usr/bin/garfio:602
+#: usr/bin/garfio:64 usr/bin/garfio:608
 msgid "Generating"
 msgstr "Gerando"
 
-#: usr/bin/garfio:79
+#: usr/bin/garfio:76
 msgid "Directory"
 msgstr "Diretório"
 
-#: usr/bin/garfio:80
+#: usr/bin/garfio:77
 msgid "Size"
 msgstr "Tamanho"
 
-#: usr/bin/garfio:83 usr/bin/garfio:84
+#: usr/bin/garfio:80 usr/bin/garfio:81
 msgid "Finished successfully"
 msgstr "Processo finalizado"
 
-#: usr/bin/garfio:99
+#: usr/bin/garfio:96
 msgid "Clean directory"
 msgstr "Diretório limpo"
 
-#: usr/bin/garfio:100
+#: usr/bin/garfio:97
 msgid "The temporary directory has been deleted"
 msgstr "O diretório temporário foi removido"
 
-#: usr/bin/garfio:112
+#: usr/bin/garfio:109
 msgid "Preparing files"
 msgstr "Preparando arquivos"
 
-#: usr/bin/garfio:123 usr/bin/garfio:126
+#: usr/bin/garfio:120 usr/bin/garfio:123
 msgid "Backup generated"
 msgstr "Cópia gerada"
 
-#: usr/bin/garfio:124 usr/bin/garfio:127
+#: usr/bin/garfio:121 usr/bin/garfio:124
 msgid "Backup generated in"
 msgstr "Cópia gerada em"
 
-#: usr/bin/garfio:133
+#: usr/bin/garfio:130
 msgid "Extracting files"
 msgstr "Descompactando arquivos"
 
-#: usr/bin/garfio:144 usr/bin/garfio:145
+#: usr/bin/garfio:141 usr/bin/garfio:142
 msgid "Your home directory has been restored"
 msgstr "O seu diretório home foi restaurado"
 
-#: usr/bin/garfio:172
+#: usr/bin/garfio:169
 msgid "Extracting ISO file"
 msgstr "Extraindo arquivo ISO"
 
-#: usr/bin/garfio:175
+#: usr/bin/garfio:172
 msgid "Copying files"
 msgstr "Copiando arquivos"
 
-#: usr/bin/garfio:178
+#: usr/bin/garfio:175
 msgid "Descompressing filesystem"
 msgstr "Descompactando o sistema de arquivos"
 
-#: usr/bin/garfio:192
+#: usr/bin/garfio:184
 msgid "Localizing system"
 msgstr "Localizando o sistema"
 
-#: usr/bin/garfio:198
+#: usr/bin/garfio:190
 msgid "Modifying liveCD menu"
 msgstr "Modificando o menu do liveCD"
 
-#: usr/bin/garfio:203
+#: usr/bin/garfio:195
 msgid "Installing Language packs"
 msgstr "Instalando pacotes de idiomas"
 
-#: usr/bin/garfio:215
+#: usr/bin/garfio:201
 msgid "Compressing filesystem"
 msgstr "Compactando o sistema de arquivos"
 
-#: usr/bin/garfio:223
+#: usr/bin/garfio:209
 msgid "Updating manifests"
 msgstr "Atualizando o manifesto"
 
-#: usr/bin/garfio:226
+#: usr/bin/garfio:211
 msgid "Updating md5 sums"
 msgstr "Atualizando as somas md5"
 
-#: usr/bin/garfio:231 usr/bin/garfio:578 usr/bin/garfio:579
+#: usr/bin/garfio:216 usr/bin/garfio:584 usr/bin/garfio:585
 msgid "Calculating the size of the file system for the installer."
 msgstr "Calculando o tamanho do sistema de arquivos para o instalador"
 
-#: usr/bin/garfio:240
+#: usr/bin/garfio:225
 msgid "Building new ISO file"
 msgstr "Construindo o novo arquivo ISO"
 
-#: usr/bin/garfio:250
+#: usr/bin/garfio:235
 msgid "Welcome to Garfio!\\n"
 msgstr "Bem-vindo(a) ao Garfio!\\n"
 
-#: usr/bin/garfio:254
+#: usr/bin/garfio:239
 msgid "Backup Mode"
 msgstr "Modo Cópia de segurança"
 
-#: usr/bin/garfio:257
+#: usr/bin/garfio:242
 msgid "Backup Environment Mode"
 msgstr "Modo Cópia de segurança do ambiente"
 
-#: usr/bin/garfio:261
+#: usr/bin/garfio:246
 msgid "Cleaning directory"
 msgstr "Limpando diretório"
 
-#: usr/bin/garfio:265
+#: usr/bin/garfio:250
 msgid "Distribution Mode"
 msgstr "Modo Distribuição"
 
-#: usr/bin/garfio:268
+#: usr/bin/garfio:253
 msgid "Environment Restoration Mode"
 msgstr "Modo Restauração do ambiente"
 
-#: usr/bin/garfio:272
+#: usr/bin/garfio:257
 msgid "Stopping processes"
 msgstr "Parando processos"
 
-#: usr/bin/garfio:281
+#: usr/bin/garfio:266
 msgid "Translation Mode"
 msgstr "Modo Tradução"
 
-#: usr/bin/garfio:289
+#: usr/bin/garfio:274
 msgid "Generating ISO"
 msgstr "Gerando ISO"
 
-#: usr/bin/garfio:293
+#: usr/bin/garfio:278
 msgid "Checking packages required"
 msgstr "Verificando pacotes necessários"
 
-#: usr/bin/garfio:306
+#: usr/bin/garfio:291
 msgid "Checking if the temporary directory was created"
 msgstr "Verificando se o diretório temporário foi criado"
 
-#: usr/bin/garfio:316
+#: usr/bin/garfio:303
 msgid "Copying /var /etc directory and excluding temporary extra files"
 msgstr "Copiando os diretórios /var /etc e excluindo arquivos extras"
 
-#: usr/bin/garfio:426
+#: usr/bin/garfio:403
 msgid "Generating filesystem.manifest and filesystem.manifest-desktop"
 msgstr "Gerando filesystem.manifest e filesystem.manifest-desktop"
 
-#: usr/bin/garfio:471
+#: usr/bin/garfio:448
 msgid "Configuring the casper and ubiquity options for the selected mode"
 msgstr "Configurando as opções de casper e ubiquity para o modo selecionado"
 
-#: usr/bin/garfio:480
+#: usr/bin/garfio:457
 msgid "Compressing the initrd for the live CD"
 msgstr "Compactando o initrd para o live CD"
 
-#: usr/bin/garfio:489
+#: usr/bin/garfio:466
 msgid "Copying the kernel and initrd for the live CD"
 msgstr "Copiando o kernel e o initrd para o live CD"
 
-#: usr/bin/garfio:515
+#: usr/bin/garfio:492
 msgid "Generating filesystem.squashfs - This may take time, be patient..."
 msgstr ""
 "Gerando filesystem.squashfs - Isto pode levar um tiempo, seja paciente..."
 
-#: usr/bin/garfio:516
+#: usr/bin/garfio:493
 msgid "Adding files and folders required by the live CD"
 msgstr "Adicionando arquivos e pastas necessárias para o live CD"
 
-#: usr/bin/garfio:524
+#: usr/bin/garfio:501
 msgid "Adding files and folders required by the cd for the selected mode"
 msgstr ""
 "Adicionando arquivos e pastas requeridas pelo cd para o modo selecionado"
 
-#: usr/bin/garfio:573 usr/bin/garfio:574
+#: usr/bin/garfio:579 usr/bin/garfio:580
 msgid ""
 "The compressed filesystem is larger than the iso9660 specification allows "
 "for a single file. You must try to reduce the amount of data you are backing "
@@ -450,19 +450,11 @@ msgstr ""
 "para um só arquivo. Você deve tentar diminuir a quantidade de dados a serem "
 "copiados e tentar novamente."
 
-#: usr/bin/garfio:591
+#: usr/bin/garfio:597
 msgid "Generating md5sum.txt for cd/dvd"
 msgstr "Gerando md5sum.txt para o cd/dvd"
 
-#: usr/bin/garfio:602
+#: usr/bin/garfio:608
 msgid "in"
 msgstr "em"
 
-#~ msgid "Assembling new ISO"
-#~ msgstr "Ensamblando a nova ISO"
-
-#~ msgid "Clean up working directory"
-#~ msgstr "Limpar diretório de trabalho"
-
-#~ msgid "<small>Removes temporary files</small>"
-#~ msgstr "<small>Remover arquivos temporários</small>"
