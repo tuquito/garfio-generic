@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Garfio Bakup Home
+Comment=Make a backup of your home directory
+Comment[es]=Generador de Bakups del direcotorio home
+Comment[pt]=Gerador de cópias de segurança do diretório home
+Exec=gksu /usr/lib/tuquito/garfio/garfio.py %U -D "Garfio"
+Icon=/usr/lib/tuquito/garfio/logo.png
+Terminal=false
+Type=Application
+Categories=Utility;
+NoDisplay=true
+MimeType=application/x-garfio;

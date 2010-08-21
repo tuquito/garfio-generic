@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+<mime-type type="application/x-garfio">
+   <comment>Archivo de Garfio</comment>
+   <comment xml:lang="en">Garfio Archive</comment>
+   <glob pattern="*.garfio"/>
+</mime-type>
+</mime-info>

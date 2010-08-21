@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Garfio
+Comment=Builder custom distributions and backups
+Comment[es]=Generador de distribuciones personalizadas y backup
+Comment[pt]=Gerador de distribuições customizadas e cópia de segurança
+Exec=gksu /usr/lib/tuquito/garfio/garfio.py -D "Garfio"
+Icon=/usr/lib/tuquito/garfio/logo.png
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;
+NotShowIn=KDE;
+X-KDE-SubstituteUID=true
