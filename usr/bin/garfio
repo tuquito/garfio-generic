@@ -186,6 +186,11 @@ translate() {
 	echo -e "* "$(gettext "Compressing filesystem")
 	chroot $ROOTDIR dpkg-query -W --showformat='${Package} ${Version}\n' > $REMASTERDIR/casper/filesystem.manifest
 	cp $REMASTERDIR/casper/filesystem.manifest $REMASTERDIR/casper/filesystem.manifest-desktop
+	REMOVE='ubiquity casper live-initramfs user-setup discover1 xresprobe os-prober libdebian-installer4'
+	for i in $REMOVE; do
+		sed -i "/${i}/d" $REMASTERDIR/casper/filesystem.manifest-desktop
+	done
+
 	if [ -f "$REMASTERDIR/casper/filesystem.squashfs" ]; then
 		rm -Rf $REMASTERDIR/casper/filesystem.squashfs
 	fi
@@ -269,7 +274,6 @@ main (){
 
 	sleep 1
 
-	# Paso 2 - Creando el CD en $TMPDIR/iso
 	TMPISO="$TMPDIR"
 	TMPDIR="$TMPDIR/TMP"
 	echo -e "* "$(gettext "Checking if the temporary directory was created")
@@ -282,7 +286,7 @@ main (){
 	mkdir -p $TMPDIR/system/{dev,etc,media/cdrom,mnt,proc,sys,tmp,var}
 	chmod ug+rwx,o+rwt $TMPDIR/system/tmp
 
-	chown $SUDO_USER:$SUDO_USER $TMPDIR
+	#chown $SUDO_USER:$SUDO_USER $TMPDIR
 
 	echo -e "* "$(gettext "Copying /var /etc directory and excluding temporary extra files")
 
@@ -292,8 +296,8 @@ main (){
 		done
 	fi
 
-	rsync --exclude='*.log.*' --exclude='*.pid' --exclude='*.bak' --exclude='*.[0-9].gz' --exclude='*.deb' $VAREXCLUDES-a /var/. $TMPDIR/system/var/.
-	rsync $VAREXCLUDES-a /etc/. $TMPDIR/system/etc/.
+	rsync --exclude='*.log.*' --exclude='*.pid' --exclude='*.bak' --exclude='*.[0-9].gz' --exclude='*.deb' $VAREXCLUDES -a /var/. $TMPDIR/system/var/.
+	rsync $VAREXCLUDES -a /etc/. $TMPDIR/system/etc/.
 
 	rm -f $TMPDIR/system/etc/cups/ssl/server.crt
 	rm -f $TMPDIR/system/etc/cups/ssl/server.key
@@ -355,13 +359,11 @@ main (){
 		done
 	fi
 
-	# asegurando que las funciones adduser y autologin de casper funcionen de acuerdo al modo seleccionado
 	[ "$1" = "dist" ] && [ ! -d $TMPDIR/system/home ] && mkdir $TMPDIR/system/home
 	[ "$1" = "dist" ] && chmod 755 /usr/share/initramfs-tools/scripts/casper-bottom/*adduser /usr/share/initramfs-tools/scripts/casper-bottom/*autologin
 	[ "$1" = "back" ] && [ -d $TMPDIR/system/home ] && rm -rf $TMPDIR/system/home
 	[ "$1" = "back" ] && chmod 644 /usr/share/initramfs-tools/scripts/casper-bottom/*adduser /usr/share/initramfs-tools/scripts/casper-bottom/*autologin
 
-	# configurando archivos para el livecd
 	DISTNAME=`lsb_release -si`
 	cp /boot/memtest86+.bin $TMPDIR/iso/memtest
 	cp /usr/lib/syslinux/isolinux.bin $TMPDIR/iso/isolinux/
@@ -376,8 +378,7 @@ main (){
 	sed -e "s/_RELEASEVERSION_/$MYRELEASE/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
 	mv -f /tmp/isolinux.cfg.garfio $TMPDIR/iso/isolinux/isolinux.cfg
 
-	MYDISTRO=`lsb_release -si`
-	sed -e "s/_RELEASE_/$MYDISTRO/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
+	sed -e "s/_RELEASE_/$DISTNAME/g" $TMPDIR/iso/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
 	mv -f /tmp/isolinux.cfg.garfio $TMPDIR/iso/isolinux/isolinux.cfg
 
 	ARCH=`archdetect | awk -F "/" '{print $1}'`
@@ -395,14 +396,12 @@ FOO
 
 	sleep 1
 
-	# Paso 3 - Generando filesystem.manifest y filesystem.manifest-desktop
 	echo -e "* "$(gettext "Generating filesystem.manifest and filesystem.manifest-desktop")
 	dpkg-query -W --showformat='${Package} ${Version}\n' > $TMPDIR/iso/casper/filesystem.manifest
 	cp $TMPDIR/iso/casper/filesystem.manifest $TMPDIR/iso/casper/filesystem.manifest-desktop
 
 	sleep 1
 
-	# Paso 4 - Preparando casper.conf dependiendo del modo seleccionado
 	if [ "$1" = "back" ]; then
 		LIVEUSER="$USER"
 	fi
@@ -431,7 +430,6 @@ FOO
 		echo "exit 0"> /usr/lib/ubiquity/user-setup/user-setup-apply
 		chmod 755 /usr/lib/ubiquity/user-setup/user-setup-apply
 
-		# copia el ícono de instalación en el escritorio del usuario
 		if [ -d "/home/$USER/Escritorio" ]; then
 			cp /usr/share/applications/ubiquity*.desktop /home/$USER/Escritorio/
 		else
@@ -447,7 +445,6 @@ FOO
 	echo "#do nothing" > /usr/share/ubiquity/apt-setup
 	chmod 755 /usr/share/ubiquity/apt-setup
 
-	# generando nueva ramdisk inicial incluyendo los scripts de casper
 	mkinitramfs -o /boot/initrd.img-`uname -r` `uname -r`
 
 	echo -e "* "$(gettext "Compressing the initrd for the live CD")
@@ -480,7 +477,6 @@ FOO
 		touch $TMPDIR/garfio.log
 	fi
 
-	# Paso 5 - Generando filesystem.squashfs
 	if [ -f $TMPDIR/iso/casper/filesystem.squashfs ]; then
 		rm -f $TMPDIR/iso/casper/filesystem.squashfs
 	fi
@@ -496,7 +492,6 @@ FOO
 
 	echo -e "* 2) "$(gettext "Adding files and folders required by the cd for the selected mode")
 
-	# agrega el resto de los archivos del sistema dependiendo del modo seleccionado
 	if [ "$1" = "back" ]; then
 		mksquashfs / $TMPDIR/iso/casper/filesystem.squashfs $SQUASHFSOPTSHIGH -e \
 		.thumbnails \
@@ -534,7 +529,6 @@ FOO
 
 	sleep 1
 
-	# borrando el ícono de instalación del escritorio
 	if [ "$1" = "back" ]; then
 		if [ -d "/home/$USER/Desktop" ]; then
 			rm -f /home/$USER/Desktop/ubiquity*.desktop
@@ -543,7 +537,6 @@ FOO
 		fi
 	fi
 
-	# registramos datos en el archivo log
 	echo "-------------------------------------------------" >>$TMPDIR/garfio.log
 	echo "Comandos ejecutados = $@" >>$TMPDIR/garfio.log
 	echo "-------------------------------------------------" >>$TMPDIR/garfio.log
@@ -568,7 +561,6 @@ FOO
 
 	sleep 1
 
-	# revisando que el tamaño del sistema de archivos comprimido sea correcto para un archivo iso9660
 	SQUASHFSSIZE=`ls -s $TMPDIR/iso/casper/filesystem.squashfs | awk -F " " '{print $1}'`
 
 	if [ "$SQUASHFSSIZE" -gt "3999999" ]; then
@@ -583,17 +575,15 @@ FOO
 	for i in `cat /tmp/size.tmp`; do a=$(($a+$i)); done
 	echo $a > $TMPDIR/iso/casper/filesystem.size
 
-	CREATEISO="`which mkisofs`"
+	CREATEISO=`which mkisofs`
 
 	if [ "$CREATEISO" = "" ]; then
-		CREATEISO="`which genisoimage`"
+		CREATEISO=`which genisoimage`
 	fi
 
-	# Paso 6 - Generando md5sum.txt para el livecd - esto es usado durante la función de chequeo del livecd
 	echo -e "* "$(gettext "Generating md5sum.txt for cd/dvd")
 	`cd $TMPDIR/iso && find . -type f -print0 | xargs -0 md5sum > md5sum.txt`
 
-	# eliminando los archivos que cambiaron y causan problemas con la comprobación del disco
 	sed -e '/isolinux/d' md5sum.txt > md5sum.txt.new
 	sed -e '/md5sum/d' md5sum.txt.new > md5sum.txt
 	rm -f md5sum.txt.new
