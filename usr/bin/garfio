@@ -186,11 +186,6 @@ translate() {
 	echo -e "* "$(gettext "Compressing filesystem")
 	chroot $ROOTDIR dpkg-query -W --showformat='${Package} ${Version}\n' > $REMASTERDIR/casper/filesystem.manifest
 	cp $REMASTERDIR/casper/filesystem.manifest $REMASTERDIR/casper/filesystem.manifest-desktop
-	REMOVE='ubiquity casper live-initramfs user-setup discover1 xresprobe os-prober libdebian-installer4'
-	for i in $REMOVE; do
-		sed -i "/${i}/d" $REMASTERDIR/casper/filesystem.manifest-desktop
-	done
-
 	if [ -f "$REMASTERDIR/casper/filesystem.squashfs" ]; then
 		rm -Rf $REMASTERDIR/casper/filesystem.squashfs
 	fi
@@ -266,7 +261,15 @@ gnotify "$(gettext 'Generating ISO')"
 main (){
 	echo -e "* "$(gettext "Checking packages required")
 	apt-get -y -qq purge popularity-contest
-	apt-get -y -qq install ubiquity-frontend-gtk metacity
+	apt-get -y -qq install casper live-initramfs user-setup discover1 xresprobe os-prober libdebian-installer4
+
+	if [ "`cat /etc/X11/default-display-manager`" = "/usr/bin/gdm" ]; then
+		apt-get -y -qq remove ubiquity-frontend-kde
+		apt-get -y -qq install metacity ubiquity-frontend-gtk
+	else
+		apt-get -y -qq install ubiquity-frontend-kde
+		apt-get -y -qq remove ubiquity-frontend-gtk
+	fi
 
 	if [ ! -f "/usr/share/ubiquity/apt-setup.saved" ]; then
 		cp /usr/share/ubiquity/apt-setup /usr/share/ubiquity/apt-setup.saved
@@ -317,7 +320,12 @@ main (){
 	#ls $TMPDIR/system/var/lib/apt/lists | grep -v ".gpg" | grep -v "lock" | grep -v "partial" | xargs -i rm $TMPDIR/system/var/lib/apt/lists/{} ;
 
 	if [ "$1" = "dist" ]; then
-		rm -f $TMPDIR/system/etc/gdm/custom.conf
+		if [ -f $TMPDIR/system/etc/gdm/custom.conf ]; then
+			rm -f $TMPDIR/system/etc/gdm/custom.conf
+		fi
+		if [ -f $TMPDIR/system/etc/kdm/custom.conf ]; then
+			rm -f $TMPDIR/system/etc/kdm/custom.conf
+		fi
 		rm -f $TMPDIR/system/etc/default/locale
 		rm -f $TMPDIR/system/etc/group
 		rm -f $TMPDIR/system/etc/gshadow
@@ -367,6 +375,7 @@ main (){
 	DISTNAME=`lsb_release -si`
 	cp /boot/memtest86+.bin $TMPDIR/iso/memtest
 	cp /usr/lib/syslinux/isolinux.bin $TMPDIR/iso/isolinux/
+	cp /usr/lib/syslinux/vesamenu.c32 $TMPDIR/iso/isolinux/
 	cp -af /etc/garfio/isolinux/* $TMPDIR/iso/isolinux/
 	cp -af /etc/garfio/preseed/* $TMPDIR/iso/preseed/
 
@@ -399,6 +408,10 @@ FOO
 	echo -e "* "$(gettext "Generating filesystem.manifest and filesystem.manifest-desktop")
 	dpkg-query -W --showformat='${Package} ${Version}\n' > $TMPDIR/iso/casper/filesystem.manifest
 	cp $TMPDIR/iso/casper/filesystem.manifest $TMPDIR/iso/casper/filesystem.manifest-desktop
+	REMOVE='ubiquity casper live-initramfs user-setup discover1 xresprobe os-prober libdebian-installer4'
+	for i in $REMOVE; do
+		sed -i "/${i}/d" $TMPDIR/iso/casper/filesystem.manifest-desktop
+	done
 
 	sleep 1
 
