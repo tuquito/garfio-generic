@@ -12,21 +12,6 @@ export TEXTDOMAINDIR="/usr/share/tuquito/locale"
 
 . /usr/lib/tuquito/garfio/garfio.conf
 
-Color="\033["
-Rojo="1;31m"
-Verde="1;32m"
-Amarillo="1;33m"
-Azul="1;34m"
-CierreColor="\033[0m"
-USER="$SUDO_USER"
-
-Color=""
-Rojo=""
-Verde=""
-Amarillo=""
-Azul=""
-CierreColor=""
-
 if [ "$TMPDIR" = "" ]; then
 	TMPDIR="/home/garfio"
 else
@@ -48,9 +33,9 @@ if [ "$CUSTOMISO" = "" ]; then
 fi
 
 error() {
-	echo -e "${Color}${Azul} "$(gettext "Usage")":${CierreColor}\n"
+	echo -e $(gettext "Usage")":\n"
 	echo -e "   sudo garfio dist|back|backh|clean|stop|trans\n"
-	echo -e "${Color}${Azul} Ejemplos:${CierreColor}\n"
+	echo -e "Ejemplos:\n"
 	echo -e "   sudo garfio back    ("$(gettext "To make a complete backup of your system. Including the home directory")")\n"
 	echo -e "   sudo garfio backh   ("$(gettext "To make a complete backup of the user's home directory. May or may not include hidden files")")\n"
 	echo -e "   sudo garfio clean   ("$(gettext "To clean temporary files from Garfio")")\n"
@@ -61,7 +46,7 @@ error() {
 }
 
 finish() {
-	echo -e "${Color}${Verde}* "$(gettext "Generating")" $1.md5\n${CierreColor}"
+	echo -e "* "$(gettext "Generating")" $1.md5\n"
 
 	MD5=`md5sum $1`
 	MD5T=`echo $MD5 | awk -F " " '{print $1}'`
@@ -93,7 +78,7 @@ clean() {
 	rm -rf $TMPDIR/TMP
 	rm -rf /boot/tmp
 	rm -rf /tmp/garfio*
-	echo -e "${Color}${Amarillo}* "$(gettext "Clean directory")"!${CierreColor}"
+	echo -e "* "$(gettext "Clean directory")"!"
 	gnotify "$(gettext 'The temporary directory has been deleted')"
 	exit 0
 }
@@ -106,7 +91,7 @@ backupHome (){
 
 	cd $TMPDIR/backups
 
-	echo -e "${Color}${Verde}* "$(gettext "Preparing files")"${CierreColor}"
+	echo -e "* "$(gettext "Preparing files")
 	EXCLUDE="--exclude='*~' --exclude='.thumbnails' --exclude='.cache'"
 	TIME=`date +"%d.%m.%y-%H%M"`
 
@@ -117,17 +102,17 @@ backupHome (){
 	fi
 
 	if [ -f $USER-$TIME.garfio ]; then
-		echo -e "${Color}${Amarillo}* "$(gettext "Backup generated")"${CierreColor}"
+		echo -e "* "$(gettext "Backup generated")
 		gnotify "$(gettext 'Backup generated in') $TMPDIR/backups/$USER-$TIME.garfio"
 	else
-		echo -e "${Color}${Amarillo}* "$(gettext "Backup generated")"${CierreColor}"
+		echo -e "* "$(gettext "Backup generated")
 		gnotify "$(gettext 'Backup generated in') $TMPDIR/backups/$USER-$TIME.garfio"
 	fi
 	exit 0
 }
 
 restoreHome() {
-	echo -e "${Color}${Amarillo}* "$(gettext "Extracting files")"${CierreColor}"
+	echo -e "* "$(gettext "Extracting files")
 	cp $2 /tmp/grestore.tar.lzma
 
 	if [ "$3" = "True" ]; then
@@ -138,7 +123,7 @@ restoreHome() {
 
 	touch /tmp/finish-garfio
 
-	echo -e "${Color}${Amarillo}* "$(gettext "Your home directory has been restored")"${CierreColor}"
+	echo -e "* "$(gettext "Your home directory has been restored")
 	gnotify "$(gettext 'Your home directory has been restored')"
 	exit 0
 }
@@ -166,13 +151,13 @@ translate() {
 	mkdir -p $MOUNTDIR
 	mkdir -p $SQUASHMOUNTDIR
 
-	echo -e "${Color}${Verde}* "$(gettext "Extracting ISO file")"${CierreColor}"
+	echo -e "* "$(gettext "Extracting ISO file")
 	mount -o loop $ISO $MOUNTDIR
 
-	echo -e "${Color}${Verde}* "$(gettext "Copying files")"${CierreColor}"
+	echo -e "* "$(gettext "Copying files")
 	rsync -at $MOUNTDIR/ $REMASTERDIR
 
-	echo -e "${Color}${Verde}* "$(gettext "Descompressing filesystem")"${CierreColor}"
+	echo -e "* "$(gettext "Descompressing filesystem")
 	mount -t squashfs -o loop $MOUNTDIR/casper/filesystem.squashfs $SQUASHMOUNTDIR
 	rsync -at $SQUASHMOUNTDIR/ $ROOTDIR
 	umount --force $SQUASHMOUNTDIR
@@ -181,24 +166,24 @@ translate() {
 
 	umount --force $MOUNTDIR
 
-	echo -e "${Color}${Verde}* "$(gettext "Localizing system")"${CierreColor}"
+	echo -e "* "$(gettext "Localizing system")
 	cp -f /etc/resolv.conf $ROOTDIR/etc/resolv.conf
 	mount --bind /proc $ROOTDIR/proc
 	mv -f $ROOTDIR/etc/wgetrc $ROOTDIR/etc/wgetrc.orig
 	cp -f /etc/wgetrc $ROOTDIR/etc/wgetrc
 
-	echo -e "${Color}${Verde}* "$(gettext "Modifying liveCD menu")"${CierreColor}"
+	echo -e "* "$(gettext "Modifying liveCD menu")
 	sed -e "s/initrd=/locale=$NEWLANG initrd=/g" $REMASTERDIR/isolinux/isolinux.cfg > /tmp/isolinux.cfg.garfio
 	mv -f /tmp/isolinux.cfg.garfio $REMASTERDIR/isolinux/isolinux.cfg
 	echo $NEWLANG > $REMASTERDIR/isolinux/lang
 
-	echo -e "${Color}${Verde}* "$(gettext "Installing Language packs")"${CierreColor}"
+	echo -e "* "$(gettext "Installing Language packs")
 	chroot $ROOTDIR /bin/sh -c "apt-get install --force-yes -y language-support-$NEWLANG language-pack-$NEWLANG language-pack-gnome-$NEWLANG-base language-pack-gnome-$NEWLANG && apt-get clean"
 	mv -f $ROOTDIR/etc/wgetrc.orig $ROOTDIR/etc/wgetrc
 	rm -rf $ROOTDIR/etc/resolv.conf
 	umount --force $ROOTDIR/proc/
 
-	echo -e "${Color}${Verde}* "$(gettext "Compressing filesystem")"${CierreColor}"
+	echo -e "* "$(gettext "Compressing filesystem")
 	chroot $ROOTDIR dpkg-query -W --showformat='${Package} ${Version}\n' > $REMASTERDIR/casper/filesystem.manifest
 	cp $REMASTERDIR/casper/filesystem.manifest $REMASTERDIR/casper/filesystem.manifest-desktop
 	if [ -f "$REMASTERDIR/casper/filesystem.squashfs" ]; then
@@ -206,14 +191,14 @@ translate() {
 	fi
 	mksquashfs $ROOTDIR $REMASTERDIR/casper/filesystem.squashfs
 
-	echo -e "${Color}${Verde}* "$(gettext "Updating manifests")"${CierreColor}"
+	echo -e "* "$(gettext "Updating manifests")
 
-	echo -e "${Color}${Verde}* "$(gettext "Updating md5 sums")"${CierreColor}"
+	echo -e "* "$(gettext "Updating md5 sums")
 	cd $REMASTERDIR
 	rm md5sum.txt
 	`find -type f -print0 | xargs -0 md5sum | grep -v isolinux/boot.cat | tee md5sum.txt`
 
-	echo -e "${Color}${Verde}* "$(gettext "Calculating the size of the file system for the installer.")"${CierreColor}"
+	echo -e "* "$(gettext "Calculating the size of the file system for the installer.")
 	`unsquashfs -lls casper/filesystem.squashfs | grep -v " inodes " | grep -v "unsquashfs:" | awk '{print $3}' | grep -v "," > /tmp/size.tmp`
 	for i in `cat /tmp/size.tmp`; do a=$(($a+$i)); done
 	echo $a > casper/filesystem.size
@@ -222,7 +207,7 @@ translate() {
 		rm -rf $NEWISO
 	fi
 
-	echo -e "${Color}${Verde}* "$(gettext "Building new ISO file")"${CierreColor}"
+	echo -e "* "$(gettext "Building new ISO file")
 	mkisofs -r -V "`lsb_release -sd`" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $NEWISO .
 
 	finish $NEWISO
@@ -236,25 +221,25 @@ echo -e $(gettext "Welcome to Garfio!\n")
 
 case $1 in
 	back)
-		echo -e "${Color}${Amarillo}* "$(gettext "Backup Mode")"\n${CierreColor}"
+		echo -e "* "$(gettext "Backup Mode")"\n"
 	;;
 	backh)
-		echo -e "${Color}${Amarillo}* "$(gettext "Backup Environment Mode")"\n${CierreColor}"
+		echo -e "* "$(gettext "Backup Environment Mode")"\n"
 		backupHome
 	;;
 	clean)
-		echo -e "${Color}${Amarillo}* "$(gettext "Cleaning directory")"...${CierreColor}"
+		echo -e "* "$(gettext "Cleaning directory")"..."
 		clean
 	;;
 	dist)
-		echo -e "${Color}${Amarillo}* "$(gettext "Distribution Mode")"\n${CierreColor}"
+		echo -e "* "$(gettext "Distribution Mode")"\n"
 	;;
 	rest)
-		echo -e "${Color}${Amarillo}* "$(gettext "Environment Restoration Mode")"\n${CierreColor}"
+		echo -e "* "$(gettext "Environment Restoration Mode")"\n"
 		restoreHome $@
 	;;
 	stop)
-		echo -e "${Color}${Amarillo}* "$(gettext "Stopping processes")"...${CierreColor}"
+		echo -e "* "$(gettext "Stopping processes")"..."
 		killall rsync
 		killall mksquashfs
 		killall mkisofs
@@ -263,7 +248,7 @@ case $1 in
 		exit 0
 	;;
 	trans)
-		echo -e "${Color}${Amarillo}* "$(gettext "Translation Mode")"\n${CierreColor}"
+		echo -e "* "$(gettext "Translation Mode")"\n"
 		translate $2 $3
 	;;
 	*)
@@ -275,7 +260,7 @@ gnotify "$(gettext 'Generating ISO')"
 
 main (){
 	# Paso 1 - Revisando si todo lo necesario está instalado
-	echo -e "${Color}${Verde}* "$(gettext "Checking packages required")"${CierreColor}"
+	echo -e "* "$(gettext "Checking packages required")
 	apt-get -y -qq purge popularity-contest
 	apt-get -y -qq install ubiquity-frontend-gtk metacity
 
@@ -288,7 +273,7 @@ main (){
 	# Paso 2 - Creando el CD en $TMPDIR/iso
 	TMPISO="$TMPDIR"
 	TMPDIR="$TMPDIR/TMP"
-	echo -e "${Color}${Verde}* "$(gettext "Checking if the temporary directory was created")"${CierreColor}"
+	echo -e "* "$(gettext "Checking if the temporary directory was created")
 
 	if [ -d "$TMPDIR" ]; then
 		rm -rf $TMPDIR
@@ -300,7 +285,7 @@ main (){
 
 	chown $SUDO_USER:$SUDO_USER $TMPDIR
 
-	echo -e "${Color}${Verde}* "$(gettext "Copying /var /etc directory and excluding temporary extra files")"${CierreColor}"
+	echo -e "* "$(gettext "Copying /var /etc directory and excluding temporary extra files")
 
 	if [ "$EXCLUDES" != "" ]; then
 		for exclude in $EXCLUDES; do
@@ -412,7 +397,7 @@ FOO
 	sleep 1
 
 	# Paso 3 - Generando filesystem.manifest y filesystem.manifest-desktop
-	echo -e "${Color}${Verde}* "$(gettext "Generating filesystem.manifest and filesystem.manifest-desktop")"${CierreColor}"
+	echo -e "* "$(gettext "Generating filesystem.manifest and filesystem.manifest-desktop")
 	dpkg-query -W --showformat='${Package} ${Version}\n' > $TMPDIR/iso/casper/filesystem.manifest
 	cp $TMPDIR/iso/casper/filesystem.manifest $TMPDIR/iso/casper/filesystem.manifest-desktop
 
@@ -457,7 +442,7 @@ FOO
 
 	sleep 1
 
-	echo -e "${Color}${Verde}* "$(gettext "Configuring the casper and ubiquity options for the selected mode")"${CierreColor}"
+	echo -e "* "$(gettext "Configuring the casper and ubiquity options for the selected mode")
 
 	rm -f /usr/share/ubiquity/apt-setup
 	echo "#do nothing" > /usr/share/ubiquity/apt-setup
@@ -466,7 +451,7 @@ FOO
 	# generando nueva ramdisk inicial incluyendo los scripts de casper
 	mkinitramfs -o /boot/initrd.img-`uname -r` `uname -r`
 
-	echo -e "${Color}${Verde}* "$(gettext "Compressing the initrd for the live CD")"${CierreColor}"
+	echo -e "* "$(gettext "Compressing the initrd for the live CD")
 
 	mkdir -p /boot/tmp/casper
 	cp /boot/initrd.img-`uname -r` /boot/tmp/initrd.gz
@@ -475,7 +460,7 @@ FOO
 	`find . | cpio --quiet --dereference -o -H newc | lzma -8 > /boot/tmp/initrd.lz`
 	cd /
 
-	echo -e "${Color}${Verde}* "$(gettext "Copying the kernel and initrd for the live CD")"${CierreColor}"
+	echo -e "* "$(gettext "Copying the kernel and initrd for the live CD")
 
 	cp /boot/vmlinuz-`uname -r` $TMPDIR/iso/casper/vmlinuz
 	cp /boot/tmp/initrd.lz $TMPDIR/iso/casper/initrd.lz
@@ -501,8 +486,8 @@ FOO
 		rm -f $TMPDIR/iso/casper/filesystem.squashfs
 	fi
 
-	echo -e "${Color}${Verde}* "$(gettext "Generating filesystem.squashfs - This may take time, be patient...")"${CierreColor}"
-	echo -e "${Color}${Verde}* 1) "$(gettext "Adding files and folders required by the live CD")"${CierreColor}"
+	echo -e "* "$(gettext "Generating filesystem.squashfs - This may take time, be patient...")
+	echo -e "* 1) "$(gettext "Adding files and folders required by the live CD")
 
 	SQUASHFSOPTSHIGH="-no-duplicates -no-recovery -always-use-fragments"
 
@@ -510,7 +495,7 @@ FOO
 
 	sleep 1
 
-	echo -e "${Color}${Verde}* 2) "$(gettext "Adding files and folders required by the cd for the selected mode")"${CierreColor}"
+	echo -e "* 2) "$(gettext "Adding files and folders required by the cd for the selected mode")
 
 	# agrega el resto de los archivos del sistema dependiendo del modo seleccionado
 	if [ "$1" = "back" ]; then
@@ -588,12 +573,12 @@ FOO
 	SQUASHFSSIZE=`ls -s $TMPDIR/iso/casper/filesystem.squashfs | awk -F " " '{print $1}'`
 
 	if [ "$SQUASHFSSIZE" -gt "3999999" ]; then
-		echo -e "${Color}${Rojo}[X] "$(gettext "The compressed filesystem is larger than the iso9660 specification allows for a single file. You must try to reduce the amount of data you are backing up and try again.")"${CierreColor}"
+		echo -e "[X] "$(gettext "The compressed filesystem is larger than the iso9660 specification allows for a single file. You must try to reduce the amount of data you are backing up and try again.")
 		echo "[X] "$(gettext "The compressed filesystem is larger than the iso9660 specification allows for a single file. You must try to reduce the amount of data you are backing up and try again.")>>$TMPDIR/garfio.log
 		exit 1
 	fi
 
-	echo -e "${Color}${Verde}* "$(gettext "Calculating the size of the file system for the installer.")"${CierreColor}"
+	echo -e "* "$(gettext "Calculating the size of the file system for the installer.")
 	echo $(gettext "Calculating the size of the file system for the installer.") >>$TMPDIR/garfio.log
 	`unsquashfs -lls $TMPDIR/iso/casper/filesystem.squashfs | grep -v " inodes " | grep -v "unsquashfs:" | awk '{print $3}' | grep -v "," > /tmp/size.tmp`
 	for i in `cat /tmp/size.tmp`; do a=$(($a+$i)); done
@@ -606,7 +591,7 @@ FOO
 	fi
 
 	# Paso 6 - Generando md5sum.txt para el livecd - esto es usado durante la función de chequeo del livecd
-	echo -e "${Color}${Verde}* "$(gettext "Generating md5sum.txt for cd/dvd")"${CierreColor}"
+	echo -e "* "$(gettext "Generating md5sum.txt for cd/dvd")
 	`cd $TMPDIR/iso && find . -type f -print0 | xargs -0 md5sum > md5sum.txt`
 
 	# eliminando los archivos que cambiaron y causan problemas con la comprobación del disco
@@ -617,7 +602,7 @@ FOO
 	sleep 1
 
 	# Paso 7 - Generando la imagen ISO
-	echo -e "${Color}${Verde}* "$(gettext "Generating")" $CUSTOMISO "$(gettext "in")" $TMPISO${CierreColor}"
+	echo -e "* "$(gettext "Generating")" $CUSTOMISO "$(gettext "in")" $TMPISO"
 
 	$CREATEISO	\
 	 -r	\
