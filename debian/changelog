@@ -1,3 +1,10 @@
+garfio-generic (2.3-1) lucid; urgency=low
+
+  * fixed config file
+  * desktop detection
+
+ -- Mario Colque <mario@tuquito.org.ar>  Sun, 22 Aug 2010 16:00:14 -0300
+
 garfio-generic (2.3) lucid; urgency=low
 
   * fork from garfio
