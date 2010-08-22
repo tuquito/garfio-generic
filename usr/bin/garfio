@@ -603,7 +603,6 @@ FOO
 
 	sleep 1
 
-	# Paso 7 - Generando la imagen ISO
 	echo -e "* "$(gettext "Generating")" $CUSTOMISO "$(gettext "in")" $TMPISO"
 
 	$CREATEISO	\
