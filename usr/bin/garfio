@@ -259,7 +259,6 @@ esac
 gnotify "$(gettext 'Generating ISO')"
 
 main (){
-	# Paso 1 - Revisando si todo lo necesario está instalado
 	echo -e "* "$(gettext "Checking packages required")
 	apt-get -y -qq purge popularity-contest
 	apt-get -y -qq install ubiquity-frontend-gtk metacity
