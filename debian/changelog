@@ -1,3 +1,11 @@
+garfio-generic (2.3-2) lucid; urgency=low
+
+  * new splash
+  * fixed memtest in isolinux.cfg
+  * fixed .desktop file in KDE enviroment
+
+ -- Mario Colque <mario@tuquito.org.ar>  Sun, 22 Aug 2010 22:01:02 -0300
+
 garfio-generic (2.3-1) lucid; urgency=low
 
   * fixed config file
