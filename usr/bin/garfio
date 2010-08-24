@@ -261,15 +261,15 @@ gnotify "$(gettext 'Generating ISO')"
 main (){
 	echo -e "* "$(gettext "Checking packages required")
 	apt-get -y -qq purge popularity-contest
-	apt-get -y -qq install casper live-initramfs user-setup discover1 xresprobe os-prober libdebian-installer4
 
-	#if [ "`cat /etc/X11/default-display-manager`" = "/usr/bin/gdm" ]; then
-	#	apt-get -y -qq remove ubiquity-frontend-kde
-		apt-get -y -qq install metacity ubiquity-frontend-gtk
-	#else
-	#	apt-get -y -qq install ubiquity-frontend-kde
-	#	apt-get -y -qq remove ubiquity-frontend-gtk
-	#fi
+	if [ "`cat /etc/X11/default-display-manager`" = "/usr/bin/kdm" ]; then
+		apt-get -y -q install ubiquity-frontend-kde
+		apt-get -y -q remove ubiquity-frontend-gtk
+	else
+		apt-get -y -q install ubiquity-frontend-gtk
+		apt-get -y -q remove ubiquity-frontend-kde
+		apt-get -y -q install metacity
+	fi
 
 	if [ ! -f "/usr/share/ubiquity/apt-setup.saved" ]; then
 		cp /usr/share/ubiquity/apt-setup /usr/share/ubiquity/apt-setup.saved
