@@ -1,3 +1,9 @@
+garfio-generic (2.3-3) lucid; urgency=low
+
+  * Solucionado error de pquetes
+
+ -- Mario Colque <mario@tuquito.org.ar>  Tue, 24 Aug 2010 00:50:28 -0300
+
 garfio-generic (2.3-2) lucid; urgency=low
 
   * new splash
